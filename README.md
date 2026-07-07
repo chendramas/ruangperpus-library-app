@@ -1,108 +1,174 @@
-# Library App
+# 📚 RuangPerpus — Library Management App
 
-## Final Project
+![Version](https://img.shields.io/badge/version-2.0.0-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Netlify](https://img.shields.io/badge/deployed-Netlify-brightgreen)
 
-### NOTES
+A full-stack **Library Management System** built with vanilla JavaScript, featuring a mock REST API backend and complete **CRUD** operations for book inventory management. Originally developed as a final project, now polished as a portfolio showcase.
 
-- Pada skeleton kode yang terdapat file `main.test.js` tidak boleh diubah sama sekali.
-- Dilarang mengganti nama function yang diberikan.
-- Dilarang mengganti struktur dari skeleton kode yang diberikan.
-- Dilarang untuk mengedit file `initial.json` yang terdapat pada folder `server`.
-- Wajib menjalankan `npm install` atau `pnpm install` sebelum mengerjakan project.
-
-### Objectives
-
-- Dapat menggunakan DOM untuk membuat _website_.
-- Dapat melakukan call API.
-
-### Description
-
-Pada Final Project kali ini kalian akan diminta untuk membuat sebuah _website_ yang dapat melakukan operasi CRUD (Create, Read, Update, Delete) data buku untuk sebuah perpustakaan.
-
-Komunikasi data antara _website_ dengan _server_ menggunakan _API_.
-
-Beberapa hal yang sudah disediakan untuk membantu kalian dalam menyelesaikan _website_ ini:
-
-- API Server sudah disediakan pada folder `server` dengan nama file `library-db.json`. API Server ini menggunakan [json-server](https://www.npmjs.com/package/json-server) yang dapat kalian jalankan
-  dengan menggunakan command `pnpm start:server`.
-
-  > server akan berjalan pada `http://localhost:3333`
-
-  API Server ini memiliki beberapa _endpoint_, antara lain:
-
-  - **GET /books (untuk mendapatkan seluruh data buku)**
-
-    Example Result:
-
-    ```JSON
-    [
-        {
-            "id": 1,
-            "title": "Buku A",
-            "author": "Author A",
-            "year": 2020,
-            "quantity": 10
-        },
-        {
-            "id": 2,
-            "title": "Buku B",
-            "author": "Author B",
-            "year": 2020,
-            "quantity": 10
-        }
-    ]
-    ```
-
-  - **POST /books (untuk menambahkan data buku)**
-
-    Payload yang dikirimkan harus memiliki format sebagai berikut:
-
-    ```json
-    {
-      "title": "string",
-      "author": "string",
-      "year": "number",
-      "quantity": "number"
-    }
-    ```
-
-  - **PUT /books/id (untuk mengubah data buku)**
-
-    Payload yang dikirimkan harus memiliki format sebagai berikut:
-
-    ```json
-    {
-      "title": "string",
-      "author": "string",
-      "year": "number",
-      "quantity": "number"
-    }
-    ```
-
-  - **DELETE /books/id (untuk menghapus data buku berdasarkan id)**
-
-    Jika id ditemukan maka akan menghapus data buku dan mengembalikan response status code 200.
-
-- Skeleton code client sudah disediakan pada folder `client` dengan nama file `main.js`. Kalian hanya perlu mengimplementasikan kode yang dibutuhkan untuk menyelesaikan _website_ ini. Beberapa
-  function sudah disediakan comment yang menjelaskan apa yang harus dilakukan oleh function tersebut. Untuk menjalankan client bisa menggunakan command `pnpm start:client`.
-
-  > client akan berjalan pada `http://localhost:3000`
+**[🔗 Live Demo](https://libraryapp-chendramuhammad.netlify.app/client/index.html)** — deployed on Netlify
 
 ---
 
-Web Application ini akan berjalan dengan general requirements sebagai berikut:
+## ✨ Features
 
-1. Ketika halaman web di render pertama kali, data buku pada _database_ secara otomatis di tampilkan kedalam _table_.
-2. Ketika tombol "Add Book" di klik maka tampilan akan berubah menjadi _form_ untuk menambahkan data buku. Ketika _form_ di submit maka data buku akan di tambahkan kedalam _database_ dan data terbaru
-   akan langsung di tampilkan secara _realtime_ tanpa perlu melakukan _refresh_ halaman.
-3. Ketika tombol "Edit" di klik maka tampilan akan berubah menjadi _form_ untuk mengubah data buku. Semua informasi mengenai buku yang akan di edit sudah berada di dalam _form input_. Ketika _form_ di
-   submit maka data buku akan di ubah kedalam _database_ dan data terbaru akan langsung di tampilkan secara _realtime_ tanpa perlu melakukan _refresh_ halaman.
-4. Ketika tombol "Hapus" di klik maka akan menghapus data buku dalam _database_ dan data buku yang di _delete_ secara otomatis di hilangkan tanpa perlu melakukan _refresh_ halaman.
-5. Aplikasi harus di deploy ke netlify, kemudian link deploy nya harus di jadikan variable `NetlifyDeployUrl` pada file `deployData.js`, jangan lupa sertakan nama dan CAMPID kalian pada file tersebut
-   (contoh bisa dilihat didalam file tersebut)
+| Feature | Description |
+|---------|-------------|
+| **📖 View Books** | Displays all books in a clean table with title, author, year, and stock |
+| **➕ Add Book** | Form-based input to add new books to the library database |
+| **✏️ Edit Book** | Pre-filled edit form — update any book's details |
+| **🗑️ Delete Book** | One-click removal of books from the inventory |
+| **⚡ Real-time UI** | All CRUD operations update the table instantly without page refresh |
+| **🧪 Test Coverage** | 7 Jest test cases covering all CRUD flows and deployment verification |
 
-Untuk penjelasan lebih lanjut, silahkan lihat di comment yang sudah disediakan pada skeleton code.
+## 🛠️ Tech Stack
 
-Video demo Applikasi:
+| Layer | Technology |
+|-------|-----------|
+| **Frontend** | Vanilla JavaScript (ES6+), HTML5, CSS3 |
+| **Styling** | Tailwind CSS (CDN) + Font Awesome icons |
+| **Backend** | json-server — mock REST API |
+| **Database** | `library-db.json` — 15 seeded Indonesian literature books |
+| **Testing** | Jest + jsdom + @testing-library/dom |
+| **Deployment** | Netlify |
+| **Package Manager** | pnpm / npm |
 
-![preview](https://youtu.be/76wCavJdTRs)
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v14+)
+- pnpm _(recommended)_ or npm
+
+### Installation
+
+```bash
+# Clone the repo
+git clone https://github.com/chendra-mas/ruangperpus-library-app.git
+cd ruangperpus-library-app
+
+# Install dependencies
+pnpm install
+```
+
+### Running Locally
+
+Start both the API server and client concurrently:
+
+```bash
+# Start backend (json-server on port 3333)
+pnpm start:server
+
+# In another terminal, start frontend (port 3000)
+pnpm start:client
+```
+
+Or use the combined command:
+
+```bash
+pnpm start
+```
+
+Open **[http://localhost:3000](http://localhost:3000)** in your browser.
+
+### Running Tests
+
+```bash
+pnpm test         # silent mode
+pnpm test:debug   # verbose mode
+```
+
+All **7 test cases** must pass to verify the application is working correctly.
+
+## 📡 API Reference
+
+The REST API runs on `http://localhost:3333` via **json-server**.
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/books` | List all books |
+| `POST` | `/books` | Add a new book |
+| `PUT` | `/books/:id` | Update a book by ID |
+| `DELETE` | `/books/:id` | Delete a book by ID |
+
+### Request Body Format (POST/PUT)
+
+```json
+{
+  "title": "string",
+  "author": "string",
+  "year": "number",
+  "quantity": "number"
+}
+```
+
+## 🗃️ Sample Data
+
+The database comes pre-seeded with 15 classic Indonesian literary works:
+
+- **Laskar Pelangi** — Andrea Hirata
+- **Bumi Manusia** — Pramoedya Ananta Toer
+- **Dilan: Dia adalah Dilanku Tahun 1990** — Pidi Baiq
+- **Negeri 5 Menara** — Ahmad Fuadi
+- And 12 more titles spanning modern and classic Indonesian literature.
+
+## 📸 Screenshots
+
+> _Add screenshots here. Recommended:_
+> - Home page with book table
+> - Add book form
+> - Edit book form with pre-filled data
+> - Mobile responsive view
+
+## 🧪 Test Suite
+
+Tests validate:
+
+- ✅ API fetch on page load (`GET /books`)
+- ✅ Correct rendering of 15 seeded books
+- ✅ Delete book flow (click → API call → re-render)
+- ✅ Edit navigation and pre-filled form
+- ✅ Edit submission (PUT request + updated render)
+- ✅ Add navigation and new book POST
+- ✅ Deployed site verification (student name + ID present)
+
+## 🌐 Deployment
+
+This app is deployed on **Netlify**:
+
+**🔗 [libraryapp-chendramuhammad.netlify.app](https://libraryapp-chendramuhammad.netlify.app/client/index.html)**
+
+To deploy your own fork:
+
+1. Push to GitHub
+2. Connect repo to Netlify
+3. Set build command to `pnpm install`
+4. Set publish directory to `./client`
+
+## 📁 Project Structure
+
+```
+ruangperpus-library-app/
+├── client/
+│   ├── index.html          # App shell (Tailwind CSS styling)
+│   └── index.js            # Main app logic (CRUD, DOM, API calls)
+├── server/
+│   ├── db.json             # Books database (json-server)
+│   └── initial.json        # Initial seed data (for tests)
+├── main.test.js            # Jest test suite (7 test cases)
+├── jest.config.js          # Jest configuration
+├── jest-setup.js           # Jest setup (jsdom, globals)
+├── deployData.js           # Deployment verification data
+├── package.json            # Dependencies & scripts
+└── README.md               # This file
+```
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+<p align="center">
+  Built with ❤️ by <strong>Chendra Muhammad Azhari Sofyan</strong>
+</p>

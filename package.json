@@ -1,22 +1,37 @@
 {
-  "name": "km4-html-final-project",
-  "version": "1.0.0",
-  "description": "final project for html course - Kampus Merdeka Batch 4",
-  "main": "index.js",
+  "name": "ruangperpus-library-app",
+  "version": "2.0.0",
+  "description": "Full-stack library management web app with CRUD operations — built with vanilla JavaScript, json-server, and Tailwind CSS.",
+  "main": "client/index.js",
   "scripts": {
     "test": "jest --silent",
     "test:debug": "jest",
-    "start:client": "serve ./client",
-    "start:server": "json-server --watch ./server/db.json --port 3333"
+    "start:client": "serve ./client -p 3000",
+    "start:server": "json-server --watch ./server/db.json --port 3333",
+    "start": "concurrently \"npm run start:server\" \"npm run start:client\""
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "library",
+    "crud",
+    "javascript",
+    "json-server",
+    "tailwindcss",
+    "dom-manipulation",
+    "rest-api",
+    "portfolio"
+  ],
+  "author": "Chendra Muhammad Azhari Sofyan",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chendra-mas/ruangperpus-library-app"
+  },
   "devDependencies": {
     "@testing-library/dom": "^9.2.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/user-event": "^14.4.3",
     "axios": "^1.4.0",
+    "concurrently": "^8.2.0",
     "dom-testing-library": "^5.0.0",
     "jest": "^28.1.3",
     "jest-environment-jsdom": "^29.5.0",

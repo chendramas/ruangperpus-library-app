@@ -104,6 +104,13 @@
       "author": "Eka Kurniawan",
       "year": 2004,
       "quantity": 3
+    },
+    {
+      "title": "Quantitative Trading",
+      "author": "Jim Simons",
+      "year": "2026",
+      "quantity": "2",
+      "id": 16
     }
   ]
 }

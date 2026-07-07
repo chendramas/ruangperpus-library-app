@@ -3,55 +3,97 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RuangPerpus</title>
+    <title>RuangPerpus — Library Management App</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
     <style>
-      .ruangguru-blue {
-        background-color: #00b1c7;
+      :root {
+        --primary: #0a0a0a;
+        --primary-hover: #1a1a1a;
+        --accent: #00E68A;
+        --accent-hover: #00cc7a;
+        --accent-blue: #00BFFF;
       }
-
-      .ruangguru-blue:hover {
-        background-color: #00859d;
+      .btn-primary {
+        background-color: var(--primary);
+        transition: all 0.2s ease;
       }
-
+      .btn-primary:hover {
+        background-color: var(--primary-hover);
+      }
+      .btn-accent {
+        background-color: var(--accent);
+        color: #0a0a0a;
+        transition: all 0.2s ease;
+      }
+      .btn-accent:hover {
+        background-color: var(--accent-hover);
+      }
+      .btn-danger {
+        background-color: #ef4444;
+        transition: all 0.2s ease;
+      }
+      .btn-danger:hover {
+        background-color: #dc2626;
+      }
+      .header-gradient {
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+      }
       .footer {
-        background-color: #f3f3f3;
+        background-color: #0a0a0a;
+        color: #9ca3af;
         padding: 16px;
         text-align: center;
+        border-top: 1px solid #1f2937;
       }
-
       body {
         min-height: 100vh;
         display: flex;
         flex-direction: column;
+        background-color: #f8fafc;
       }
-
       .content {
         flex: 1;
+      }
+      .table-header {
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+        color: white;
+      }
+      .accent-text {
+        color: var(--accent);
+      }
+      input:focus, select:focus {
+        border-color: var(--accent) !important;
+        box-shadow: 0 0 0 2px rgba(0, 230, 138, 0.2) !important;
       }
     </style>
   </head>
 
   <body>
-    <header class="ruangguru-blue py-4" id="header">
-      <div class="container mx-auto flex justify-between items-center">
-        <h1 class="text-2xl font-bold text-white" onclick="(() => {currentPage = 'home'; loadPage()})()">RuangPerpus</h1>
+    <header class="header-gradient py-4" id="header">
+      <div class="container mx-auto flex justify-between items-center px-4">
+        <h1 class="text-2xl font-bold text-white flex items-center gap-2 cursor-pointer" onclick="(() => {currentPage = 'home'; loadPage()})()">
+          <i class="fas fa-book-open accent-text"></i>
+          RuangPerpus
+        </h1>
         <nav>
-          <ul class="flex space-x-4 text-white">
-            <li><a href="#" class="hover:text-blue-200">Add</a></li>
+          <ul class="flex space-x-4">
+            <li>
+              <a href="#" class="text-white hover:text-green-300 transition flex items-center gap-1">
+                <i class="fas fa-plus-circle"></i> Add Book
+              </a>
+            </li>
           </ul>
         </nav>
       </div>
     </header>
 
-    <main class="content container mx-auto p-4"></main>
+    <main class="content container mx-auto p-6"></main>
 
     <footer class="footer">
-      <p>&copy; 2023 RuangPerpus. All rights reserved.</p>
-      <p class="studentName">Chendra Muhammad Azhari Sofyan</p>
-      <p class="studentId">FE5394940</p>
-      <!-- TODO: answer here -->
+      <p class="text-sm">&copy; 2024 RuangPerpus. Built with vanilla JS + json-server.</p>
+      <p class="studentName text-xs mt-1">Chendra Muhammad Azhari Sofyan</p>
+      <p class="studentId text-xs">FE5394940</p>
     </footer>
 
     <script src="index.js"></script>
