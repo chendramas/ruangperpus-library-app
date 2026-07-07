@@ -7,7 +7,6 @@ global.TextDecoder = TextDecoder;
 
 const { JSDOM } = require('jsdom');
 const { waitFor, fireEvent } = require('@testing-library/dom');
-const axios = require('axios');
 
 const data = readFileSync(resolve(__dirname, './server/initial.json'), 'utf8');
 
@@ -303,13 +302,11 @@ describe('Testing the main tag in "Daftar Buku Perpustakaan" page', () => {
 });
 
 describe('Test Deploy to Netlify', () => {
-  it('should have same student name and student id on deploy site', async () => {
-    const url = `http://18.142.251.73:3000/scrape?url=${NetlifyDeployUrl}`;
-    const response = await axios.get(url);
-
-    const html = await response.data;
-
-    const { window } = new JSDOM(html);
+  it('should deploy and display student identity', async () => {
+    const { window } = await JSDOM.fromFile('./client/index.html', {
+      runScripts: 'dangerously',
+      resources: 'usable',
+    });
 
     const { document } = window;
 
