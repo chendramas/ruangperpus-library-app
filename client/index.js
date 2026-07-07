@@ -34,7 +34,9 @@ const pageListMainContent = `<div class="flex items-center justify-between mb-4"
   </thead>
   <tbody>
   </tbody>
-</table>`;
+</table>
+
+<div id="errorContainer" class="hidden"></div>`;
 
 const pageEditBookMainContent = `<h2 class="text-2xl font-bold mb-4">Edit Buku</h2>
 
@@ -47,22 +49,22 @@ const pageAddBookMainContent = `<h2 class="text-2xl font-bold mb-4">Tambah Buku<
 <form class="max-w-sm mx-auto" onsubmit="return handleAddForm(event)">
   <div class="mb-4">
     <label for="title" class="block text-gray-700 font-semibold mb-2">Judul Buku</label>
-    <input required type="text" id="title" name="title" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" />
+    <input required type="text" id="title" name="title" class="w-full" />
   </div>
   <div class="mb-4">
     <label for="author" class="block text-gray-700 font-semibold mb-2">Penulis Buku</label>
-    <input required type="text" id="author" name="author" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" />
+    <input required type="text" id="author" name="author" class="w-full" />
   </div>
   <div class="mb-4">
     <label for="year" class="block text-gray-700 font-semibold mb-2">Tahun Terbit</label>
-    <input required type="number" id="year" name="year" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" />
+    <input required type="number" id="year" name="year" class="w-full" />
   </div>
   <div class="mb-4">
     <label for="quantity" class="block text-gray-700 font-semibold mb-2">Jumlah Stok</label>
-    <input required type="number" id="quantity" name="quantity" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" />
+    <input required type="number" id="quantity" name="quantity" class="w-full" />
   </div>
   <div class="flex justify-center">
-    <input type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" value="Tambah Buku" />
+    <input type="submit" class="btn-accent" value="Tambah Buku" />
   </div>
 </form>
 `;
@@ -158,8 +160,8 @@ function generateRows(books) {
         <td class="px-6 py-4 border-b">${objek.year}</td>
         <td class="px-6 py-4 border-b">${objek.quantity}</td>
         <td class="px-6 py-4 border-b text-center">
-          <button class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="handleClickEditButton(${objek.id})">Edit</button>
-          <button class="inline-block bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onclick="handleClickDeleteButton(${objek.id})">Hapus</button>  
+          <button class="btn-blue" onclick="handleClickEditButton(${objek.id})">Edit</button>
+          <button class="btn-danger" onclick="handleClickDeleteButton(${objek.id})">Hapus</button>  
         </td>
       </tr>`;
       rows = rows + data;
@@ -171,22 +173,22 @@ function generateRows(books) {
 function generateEditFormInput() {
   return `<div class="mb-4">
   <label for="title" class="block text-gray-700 font-semibold mb-2">Judul Buku</label>
-  <input required type="text" id="title" name="title" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" value="${currentBook?.title ?? ''}">
+  <input required type="text" id="title" name="title" class="w-full" value="${currentBook?.title ?? ''}">
 </div>
 <div class="mb-4">
   <label for="author" class="block text-gray-700 font-semibold mb-2">Penulis Buku</label>
-  <input required type="text" id="author" name="author" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" value="${currentBook?.author ?? ''}">
+  <input required type="text" id="author" name="author" class="w-full" value="${currentBook?.author ?? ''}">
 </div>
 <div class="mb-4">
   <label for="year" class="block text-gray-700 font-semibold mb-2">Tahun Terbit</label>
-  <input required type="number" id="year" name="year" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" value="${currentBook?.year ?? ''}">
+  <input required type="number" id="year" name="year" class="w-full" value="${currentBook?.year ?? ''}">
 </div>
 <div class="mb-4">
   <label for="quantity" class="block text-gray-700 font-semibold mb-2">Jumlah Stok</label>
-  <input required type="number" id="quantity" name="quantity" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" value="${currentBook?.quantity ?? ''}">
+  <input required type="number" id="quantity" name="quantity" class="w-full" value="${currentBook?.quantity ?? ''}">
 </div>
 <div class="flex justify-center">
-  <input type="submit" class="bg-accent btn-accent font-bold py-2 px-4 rounded" value="Simpan" />
+  <input type="submit" class="btn-accent" value="Simpan" />
 </div>`;
 }
 
