@@ -48,19 +48,19 @@ const pageAddBookMainContent = `<h2 class="text-2xl font-bold mb-4">Tambah Buku<
 
 <form class="max-w-sm mx-auto" onsubmit="return handleAddForm(event)">
   <div class="mb-4">
-    <label for="title" class="block text-gray-700 font-semibold mb-2">Judul Buku</label>
+    <label for="title" class="font-semibold mb-2">Judul Buku</label>
     <input required type="text" id="title" name="title" class="w-full" />
   </div>
   <div class="mb-4">
-    <label for="author" class="block text-gray-700 font-semibold mb-2">Penulis Buku</label>
+    <label for="author" class="font-semibold mb-2">Penulis Buku</label>
     <input required type="text" id="author" name="author" class="w-full" />
   </div>
   <div class="mb-4">
-    <label for="year" class="block text-gray-700 font-semibold mb-2">Tahun Terbit</label>
+    <label for="year" class="font-semibold mb-2">Tahun Terbit</label>
     <input required type="number" id="year" name="year" class="w-full" />
   </div>
   <div class="mb-4">
-    <label for="quantity" class="block text-gray-700 font-semibold mb-2">Jumlah Stok</label>
+    <label for="quantity" class="font-semibold mb-2">Jumlah Stok</label>
     <input required type="number" id="quantity" name="quantity" class="w-full" />
   </div>
   <div class="flex justify-center">
@@ -150,7 +150,7 @@ function generateRows(books) {
   let rows = '';
   if (books.length === 0) {
     rows = `<tr>
-   <td colspan="5" class="px-6 py-4 border-b text-center">Tidak ada buku yang ditemukan</td>
+   <td colspan="5" class="px-6 py-4 border-b text-center text-gray-400">Tidak ada buku yang ditemukan</td>
 </tr>`;
   } else {
     books.forEach((objek) => {
@@ -172,19 +172,19 @@ function generateRows(books) {
 
 function generateEditFormInput() {
   return `<div class="mb-4">
-  <label for="title" class="block text-gray-700 font-semibold mb-2">Judul Buku</label>
+  <label for="title" class="font-semibold mb-2">Judul Buku</label>
   <input required type="text" id="title" name="title" class="w-full" value="${currentBook?.title ?? ''}">
 </div>
 <div class="mb-4">
-  <label for="author" class="block text-gray-700 font-semibold mb-2">Penulis Buku</label>
+  <label for="author" class="font-semibold mb-2">Penulis Buku</label>
   <input required type="text" id="author" name="author" class="w-full" value="${currentBook?.author ?? ''}">
 </div>
 <div class="mb-4">
-  <label for="year" class="block text-gray-700 font-semibold mb-2">Tahun Terbit</label>
+  <label for="year" class="font-semibold mb-2">Tahun Terbit</label>
   <input required type="number" id="year" name="year" class="w-full" value="${currentBook?.year ?? ''}">
 </div>
 <div class="mb-4">
-  <label for="quantity" class="block text-gray-700 font-semibold mb-2">Jumlah Stok</label>
+  <label for="quantity" class="font-semibold mb-2">Jumlah Stok</label>
   <input required type="number" id="quantity" name="quantity" class="w-full" value="${currentBook?.quantity ?? ''}">
 </div>
 <div class="flex justify-center">

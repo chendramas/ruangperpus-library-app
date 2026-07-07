@@ -8,18 +8,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" />
     <style>
       :root {
-        --primary: #0a0a0a;
-        --primary-hover: #1a1a1a;
+        --bg: #0a0a0a;
+        --bg-card: #111111;
+        --bg-card-hover: #1a1a1a;
+        --border: #1f2937;
+        --text: #e5e7eb;
+        --text-muted: #9ca3af;
         --accent: #00E68A;
         --accent-hover: #00cc7a;
         --accent-blue: #00BFFF;
-      }
-      .btn-primary {
-        background-color: var(--primary);
-        transition: all 0.2s ease;
-      }
-      .btn-primary:hover {
-        background-color: var(--primary-hover);
+        --accent-blue-hover: #00a8e6;
+        --danger: #ef4444;
+        --danger-hover: #dc2626;
       }
       .btn-accent {
         background-color: var(--accent);
@@ -28,6 +28,8 @@
         padding: 8px 20px;
         border-radius: 8px;
         transition: all 0.2s ease;
+        border: none;
+        cursor: pointer;
       }
       .btn-accent:hover {
         background-color: var(--accent-hover);
@@ -39,36 +41,42 @@
         padding: 8px 20px;
         border-radius: 8px;
         transition: all 0.2s ease;
+        border: none;
+        cursor: pointer;
       }
       .btn-blue:hover {
-        background-color: #00a8e6;
+        background-color: var(--accent-blue-hover);
       }
       .btn-danger {
-        background-color: #ef4444;
+        background-color: var(--danger);
         color: white;
         font-weight: 600;
         padding: 8px 20px;
         border-radius: 8px;
         transition: all 0.2s ease;
+        border: none;
+        cursor: pointer;
       }
       .btn-danger:hover {
-        background-color: #dc2626;
+        background-color: var(--danger-hover);
       }
       .header-gradient {
         background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+        border-bottom: 1px solid var(--border);
       }
       .footer {
-        background-color: #0a0a0a;
-        color: #9ca3af;
-        padding: 16px;
+        background-color: var(--bg);
+        color: var(--text-muted);
+        padding: 20px;
         text-align: center;
-        border-top: 1px solid #1f2937;
+        border-top: 1px solid var(--border);
       }
       body {
         min-height: 100vh;
         display: flex;
         flex-direction: column;
-        background-color: #f8fafc;
+        background-color: var(--bg);
+        color: var(--text);
       }
       .content {
         flex: 1;
@@ -77,19 +85,58 @@
         background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
         color: white;
       }
+      .table-header th {
+        border-bottom: 1px solid var(--border) !important;
+        padding: 12px 24px !important;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+      }
       .accent-text {
         color: var(--accent);
       }
       input:focus, select:focus {
         border-color: var(--accent) !important;
-        box-shadow: 0 0 0 2px rgba(0, 230, 138, 0.2) !important;
+        box-shadow: 0 0 0 2px rgba(0, 230, 138, 0.15) !important;
+        outline: none;
       }
       input, select {
-        border: 1px solid #374151;
+        border: 1px solid var(--border);
         border-radius: 8px;
         padding: 10px 14px;
-        background: #f9fafb;
+        background: #1a1a1a;
+        color: var(--text);
         transition: all 0.2s ease;
+      }
+      input::placeholder {
+        color: #6b7280;
+      }
+      label {
+        font-weight: 500;
+        margin-bottom: 6px;
+        display: block;
+      }
+      table {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      table td {
+        padding: 12px 24px !important;
+        border-bottom: 1px solid #1f2937 !important;
+      }
+      table tr:last-child td {
+        border-bottom: none !important;
+      }
+      table tbody tr {
+        transition: background 0.15s ease;
+      }
+      table tbody tr:hover {
+        background: var(--bg-card-hover);
+      }
+      h2 {
+        color: var(--text);
+        font-weight: 700;
       }
     </style>
   </head>
@@ -104,7 +151,7 @@
         <nav>
           <ul class="flex space-x-4">
             <li>
-              <a href="#" class="text-white hover:text-green-300 transition flex items-center gap-1">
+              <a href="#" class="text-gray-300 hover:text-green-300 transition flex items-center gap-1">
                 <i class="fas fa-plus-circle"></i> Add Book
               </a>
             </li>
