@@ -1,0 +1,4 @@
+{
+  "install": "npm install json-server",
+  "start": "npm run start:api"
+}

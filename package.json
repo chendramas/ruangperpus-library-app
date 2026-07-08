@@ -8,7 +8,8 @@
     "test:debug": "jest",
     "start:client": "serve ./client -p 3000",
     "start:server": "json-server --watch ./server/db.json --port 3333",
-    "start": "concurrently \"npm run start:server\" \"npm run start:client\""
+    "start": "concurrently \"npm run start:server\" \"npm run start:client\"",
+    "start:api": "json-server --watch ./server/db.json --port $PORT --host 0.0.0.0"
   },
   "keywords": [
     "library",
