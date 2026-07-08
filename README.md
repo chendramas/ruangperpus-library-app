@@ -3,9 +3,9 @@
 ![Version](https://img.shields.io/badge/version-2.0.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-A full-stack **Library Management System** built with vanilla JavaScript, featuring a mock REST API backend and complete **CRUD** operations for book inventory management.
+A full-stack **Library Management System** built with vanilla JavaScript, featuring a serverless REST API backend and complete **CRUD** operations for book inventory management.
 
-**[Live Demo](https://libraryapp-chendramuhammad.netlify.app/client/index.html)**
+**[Live Demo](https://ruangperpus-library-app.vercel.app)**
 
 ---
 
@@ -31,7 +31,7 @@ A full-stack **Library Management System** built with vanilla JavaScript, featur
 
 ### Keunggulan
 
-- **Vanilla JavaScript** - Tidak依赖框架, murni ES6+ dengan DOM manipulation
+- **Vanilla JavaScript** - Murni ES6+ dengan DOM manipulation, tanpa framework
 - **Dark Theme** - Desain modern dengan konsistensi warna dan UX yang baik
 - **XSS Protection** - Semua output di-escape untuk mencegah script injection
 - **Confirmation Dialog** - Konfirmasi sebelum menghapus data
@@ -57,10 +57,10 @@ A full-stack **Library Management System** built with vanilla JavaScript, featur
 |-------|-----------|
 | **Frontend** | Vanilla JavaScript (ES6+), HTML5, CSS3 |
 | **Styling** | Tailwind CSS (CDN) + Font Awesome icons |
-| **Backend** | json-server - mock REST API |
-| **Database** | `server/db.json` - pre-seeded Indonesian literature books |
+| **Backend** | Vercel Serverless Functions (production) / json-server (local) |
+| **Database** | In-memory (production) / `server/db.json` (local) |
 | **Testing** | Jest + jsdom + @testing-library/dom |
-| **Deployment** | Netlify |
+| **Deployment** | Vercel (frontend + API) |
 
 ## Getting Started
 
@@ -95,14 +95,18 @@ npm run test:debug   # verbose mode
 
 ## API Reference
 
+### Local Development (json-server)
+
 The REST API runs on `http://localhost:3333` via **json-server**.
+
+### Production (Vercel Serverless)
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `GET` | `/books` | List all books |
-| `POST` | `/books` | Add a new book |
-| `PUT` | `/books/:id` | Update a book by ID |
-| `DELETE` | `/books/:id` | Delete a book by ID |
+| `GET` | `/api/books` | List all books |
+| `POST` | `/api/books` | Add a new book |
+| `PUT` | `/api/books/:id` | Update a book by ID |
+| `DELETE` | `/api/books/:id` | Delete a book by ID |
 
 ### Request Body Format (POST/PUT)
 
@@ -119,15 +123,20 @@ The REST API runs on `http://localhost:3333` via **json-server**.
 
 ```
 ruangperpus-library-app/
+├── api/
+│   ├── books.js            # Vercel serverless: GET/POST /api/books
+│   └── books/
+│       └── [id].js         # Vercel serverless: GET/PUT/DELETE /api/books/:id
 ├── client/
 │   ├── index.html          # App shell (Tailwind CSS styling)
 │   └── index.js            # Main app logic (CRUD, DOM, API calls)
 ├── server/
-│   ├── db.json             # Books database (json-server)
+│   ├── db.json             # Books database (json-server, local dev)
 │   └── initial.json        # Initial seed data (for tests)
 ├── main.test.js            # Jest test suite
 ├── jest.config.js          # Jest configuration
 ├── jest-setup.js           # Jest setup (jsdom, globals)
+├── vercel.json             # Vercel deployment config
 ├── package.json            # Dependencies & scripts
 └── README.md               # This file
 ```
