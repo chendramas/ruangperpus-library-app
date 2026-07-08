@@ -108,9 +108,16 @@
     {
       "title": "Quantitative Trading",
       "author": "Jim Simons",
-      "year": "2026",
-      "quantity": "2",
+      "year": 2026,
+      "quantity": 2,
       "id": 16
+    },
+    {
+      "title": "Trading Psychology",
+      "author": "Chendra",
+      "year": 2026,
+      "quantity": 5,
+      "id": 17
     }
   ]
 }

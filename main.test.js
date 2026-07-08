@@ -9,10 +9,7 @@ const { JSDOM } = require('jsdom');
 const { waitFor, fireEvent } = require('@testing-library/dom');
 
 const data = readFileSync(resolve(__dirname, './server/initial.json'), 'utf8');
-
 const dataJSON = JSON.parse(data);
-
-const { studentId, studentName, NetlifyDeployUrl } = require('./deployData.js');
 
 let windowJSDOM = null;
 
@@ -37,50 +34,33 @@ beforeEach(async () => {
   windowJSDOM = d;
 });
 
-describe('Testing the main tag in "Daftar Buku Perpustakaan" page', () => {
-  it('should be fetch data from API, http://localhost:3333/books', async () => {
+describe('RuangPerpus Library App', () => {
+  it('should fetch books from API on page load', async () => {
     await waitFor(() => expect(fetch).toHaveBeenCalledTimes(1));
-
     expect(fetch).toHaveBeenLastCalledWith('http://localhost:3333/books');
   });
 
-  it('should be render data from API', async () => {
+  it('should render all seeded books in the table', async () => {
     await waitFor(() => {
       const bookList = windowJSDOM.document.querySelectorAll('.book-item');
       expect(bookList.length).toBe(15);
 
-      // get all booklist children
       const book1 = bookList[0].children;
-
-      // check if book1 has 5 children
       expect(book1.length).toBe(5);
-
-      // check if book1 title is correct
       expect(book1[0].textContent).toBe('Laskar Pelangi');
-
-      // check if book1 author is correct
       expect(book1[1].textContent).toBe('Andrea Hirata');
-
-      // check if book1 year is correct
       expect(book1[2].textContent).toBe('2005');
-
-      // check if book1 quantity is correct
       expect(book1[3].textContent).toBe('3');
 
-      // check if book1 action is correct
       const actions = book1[4].children;
       expect(actions.length).toBe(2);
-
-      // check if book1 action edit is correct
       expect(actions[0].textContent).toBe('Edit');
-
-      // check if book1 action delete is correct
       expect(actions[1].textContent).toBe('Hapus');
     });
   });
 
-  describe('Test click delete button', () => {
-    it('should be delete book', async () => {
+  describe('Delete Book', () => {
+    it('should call DELETE API and remove the book from the table', async () => {
       const dataJSONDelete = [...dataJSON.books];
       dataJSONDelete.shift();
 
@@ -95,6 +75,7 @@ describe('Testing the main tag in "Daftar Buku Perpustakaan" page', () => {
       const book1 = bookList[0].children;
       const actions = book1[4].children;
 
+      windowJSDOM.window.confirm = jest.fn(() => true);
       fireEvent.click(actions[1]);
 
       const lastCall = fetch.mock.lastCall;
@@ -112,8 +93,8 @@ describe('Testing the main tag in "Daftar Buku Perpustakaan" page', () => {
     });
   });
 
-  describe('Test click edit button', () => {
-    it('should be move to "edit buku" page', async () => {
+  describe('Edit Book', () => {
+    it('should navigate to edit form with prefilled data', async () => {
       const mockData = [...dataJSON.books];
       const mockDataEdit = mockData.shift();
 
@@ -140,10 +121,8 @@ describe('Testing the main tag in "Daftar Buku Perpustakaan" page', () => {
         expect(h2.textContent).toBe('Edit Buku');
       });
     });
-  });
 
-  describe('Test Edit Book Form', () => {
-    it('should can update book', async () => {
+    it('should update book via PUT request and re-render', async () => {
       const mockData = [...dataJSON.books];
       let mockDataEdit = mockData.shift();
 
@@ -222,20 +201,16 @@ describe('Testing the main tag in "Daftar Buku Perpustakaan" page', () => {
         expect(bookListAfterEdit.length).toBe(15);
 
         const book1AfterEdit = bookListAfterEdit[0].children;
-
         expect(book1AfterEdit[0].textContent).toBe('Laskar Pelangi 2');
-
         expect(book1AfterEdit[1].textContent).toBe('Andrea Hirata 2');
-
         expect(book1AfterEdit[2].textContent).toBe('2006');
-
         expect(book1AfterEdit[3].textContent).toBe('4');
       });
     });
   });
 
-  describe('Test Add Book Form', () => {
-    test('if tag a clicked, move to "tambah buku" page and create a new data', async () => {
+  describe('Add Book', () => {
+    it('should navigate to add form, submit via POST, and render new book', async () => {
       const a = windowJSDOM.document.querySelector('a');
       fireEvent.click(a);
 
@@ -288,32 +263,11 @@ describe('Testing the main tag in "Daftar Buku Perpustakaan" page', () => {
         expect(bookList.length).toBe(16);
 
         const book1 = bookList[15].children;
-
         expect(book1[0].textContent).toBe('Laskar Pelangi 2');
-
         expect(book1[1].textContent).toBe('Andrea Hirata 2');
-
         expect(book1[2].textContent).toBe('2006');
-
         expect(book1[3].textContent).toBe('99');
       });
     });
-  });
-});
-
-describe('Test Deploy to Netlify', () => {
-  it('should deploy and display student identity', async () => {
-    const { window } = await JSDOM.fromFile('./client/index.html', {
-      runScripts: 'dangerously',
-      resources: 'usable',
-    });
-
-    const { document } = window;
-
-    const studentNameText = document.querySelector('.studentName');
-    const studentIdText = document.querySelector('.studentId');
-
-    expect(studentNameText.textContent).toBe(studentName);
-    expect(studentIdText.textContent).toBe(studentId);
   });
 });

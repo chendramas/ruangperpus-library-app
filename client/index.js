@@ -1,8 +1,12 @@
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
 let currentPage = 'home';
 let currentBook = null;
 let books = [];
-let rows = '';
-let formInput = '';
 
 const API_URL = 'http://localhost:3333/books';
 const main = document.querySelector('main');
@@ -76,17 +80,16 @@ async function handleClickEditButton(bookId) {
     currentPage = 'edit';
     loadPage();
   } catch (error) {
-    console.log(error);
     showError('Terjadi kesalahan saat mengambil data buku');
   }
 }
 
 async function handleClickDeleteButton(bookId) {
   try {
+    if (!confirm('Yakin mau hapus buku ini?')) return;
     await deleteBook(bookId);
     loadPage();
   } catch (error) {
-    console.log(error);
     showError('Terjadi kesalahan saat menghapus buku');
   }
 }
@@ -98,8 +101,8 @@ async function handleEditForm(event) {
     const book = {
       title: document.getElementById('title').value,
       author: document.getElementById('author').value,
-      year: parseInt(document.getElementById('year').value),
-      quantity: parseInt(document.getElementById('quantity').value),
+      year: parseInt(document.getElementById('year').value, 10),
+      quantity: parseInt(document.getElementById('quantity').value, 10),
     };
 
     await editBook(book);
@@ -108,7 +111,6 @@ async function handleEditForm(event) {
     currentPage = 'home';
     loadPage();
   } catch (error) {
-    console.log(error);
     showError('Terjadi kesalahan saat mengubah buku');
   }
 }
@@ -120,8 +122,8 @@ async function handleAddForm(event) {
     const book = {
       title: document.getElementById('title').value,
       author: document.getElementById('author').value,
-      year: parseInt(document.getElementById('year').value),
-      quantity: parseInt(document.getElementById('quantity').value),
+      year: parseInt(document.getElementById('year').value, 10),
+      quantity: parseInt(document.getElementById('quantity').value, 10),
     };
 
     await addBook(book);
@@ -129,7 +131,6 @@ async function handleAddForm(event) {
     currentPage = 'home';
     loadPage();
   } catch (error) {
-    console.log(error);
     showError('Terjadi kesalahan saat menambah buku');
   }
 }
@@ -155,10 +156,10 @@ function generateRows(books) {
   } else {
     books.forEach((objek) => {
       let data = `<tr class="book-item">
-        <td class="px-6 py-4 border-b">${objek.title}</td>
-        <td class="px-6 py-4 border-b">${objek.author}</td>
-        <td class="px-6 py-4 border-b">${objek.year}</td>
-        <td class="px-6 py-4 border-b">${objek.quantity}</td>
+        <td class="px-6 py-4 border-b">${escapeHtml(objek.title)}</td>
+        <td class="px-6 py-4 border-b">${escapeHtml(objek.author)}</td>
+        <td class="px-6 py-4 border-b">${escapeHtml(String(objek.year))}</td>
+        <td class="px-6 py-4 border-b">${escapeHtml(String(objek.quantity))}</td>
         <td class="px-6 py-4 border-b text-center">
           <button class="btn-blue" onclick="handleClickEditButton(${objek.id})">Edit</button>
           <button class="btn-danger" onclick="handleClickDeleteButton(${objek.id})">Hapus</button>  
@@ -173,19 +174,19 @@ function generateRows(books) {
 function generateEditFormInput() {
   return `<div class="mb-4">
   <label for="title" class="font-semibold mb-2">Judul Buku</label>
-  <input required type="text" id="title" name="title" class="w-full" value="${currentBook?.title ?? ''}">
+  <input required type="text" id="title" name="title" class="w-full" value="${escapeHtml(currentBook?.title ?? '')}">
 </div>
 <div class="mb-4">
   <label for="author" class="font-semibold mb-2">Penulis Buku</label>
-  <input required type="text" id="author" name="author" class="w-full" value="${currentBook?.author ?? ''}">
+  <input required type="text" id="author" name="author" class="w-full" value="${escapeHtml(currentBook?.author ?? '')}">
 </div>
 <div class="mb-4">
   <label for="year" class="font-semibold mb-2">Tahun Terbit</label>
-  <input required type="number" id="year" name="year" class="w-full" value="${currentBook?.year ?? ''}">
+  <input required type="number" id="year" name="year" class="w-full" value="${escapeHtml(String(currentBook?.year ?? ''))}">
 </div>
 <div class="mb-4">
   <label for="quantity" class="font-semibold mb-2">Jumlah Stok</label>
-  <input required type="number" id="quantity" name="quantity" class="w-full" value="${currentBook?.quantity ?? ''}">
+  <input required type="number" id="quantity" name="quantity" class="w-full" value="${escapeHtml(String(currentBook?.quantity ?? ''))}">
 </div>
 <div class="flex justify-center">
   <input type="submit" class="btn-accent" value="Simpan" />
@@ -233,7 +234,6 @@ async function fetchBooks() {
     const hasil = await response.json();
     books = hasil;
   } catch (error) {
-    console.log(error);
     showError('Terjadi kesalahan saat mengambil data buku');
     books = [];
   }
@@ -249,7 +249,6 @@ async function addBook(book) {
     const result = await response.json();
     return result;
   } catch (error) {
-    console.log(error);
     showError('Terjadi kesalahan saat menambah buku');
   }
 }
@@ -264,7 +263,6 @@ async function editBook(book) {
     const result = await response.json();
     return result;
   } catch (error) {
-    console.log(error);
     showError('Terjadi kesalahan saat mengubah buku');
   }
 }
@@ -275,7 +273,6 @@ async function deleteBook(bookId) {
     const result = await response.json();
     return result;
   } catch (error) {
-    console.log(error);
     showError('Terjadi kesalahan saat menghapus buku');
   }
 }
