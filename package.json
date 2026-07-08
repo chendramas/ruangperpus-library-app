@@ -9,7 +9,8 @@
     "start:client": "serve ./client -p 3000",
     "start:server": "json-server --watch ./server/db.json --port 3333",
     "start": "concurrently \"npm run start:server\" \"npm run start:client\"",
-    "start:api": "json-server --watch ./server/db.json --port $PORT --host 0.0.0.0"
+    "start:api": "json-server --watch ./server/db.json --port $PORT --host 0.0.0.0",
+    "vercel-build": "echo 'Build complete'"
   },
   "keywords": [
     "library",
