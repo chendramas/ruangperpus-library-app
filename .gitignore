@@ -6,3 +6,4 @@ dist/
 build/
 coverage/
 pnpm-lock.yaml
+RUNNING.md
