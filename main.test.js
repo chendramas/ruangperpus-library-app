@@ -11,13 +11,18 @@ const { waitFor, fireEvent } = require('@testing-library/dom');
 const data = readFileSync(resolve(__dirname, './server/initial.json'), 'utf8');
 const dataJSON = JSON.parse(data);
 
+const API_URL = 'http://localhost:3333/books';
+
 let windowJSDOM = null;
 
 beforeEach(async () => {
   const { window } = await JSDOM.fromFile('./client/index.html', {
     runScripts: 'dangerously',
     resources: 'usable',
+    url: 'http://localhost:3000',
   });
+
+  window.APP_CONFIG = { API_URL };
 
   fetch = jest.fn().mockReturnValueOnce(Promise.resolve({ json: () => dataJSON.books }));
 
@@ -37,7 +42,7 @@ beforeEach(async () => {
 describe('RuangPerpus Library App', () => {
   it('should fetch books from API on page load', async () => {
     await waitFor(() => expect(fetch).toHaveBeenCalledTimes(1));
-    expect(fetch).toHaveBeenLastCalledWith('http://localhost:3333/books');
+    expect(fetch).toHaveBeenLastCalledWith(API_URL);
   });
 
   it('should render all seeded books in the table', async () => {
@@ -79,7 +84,7 @@ describe('RuangPerpus Library App', () => {
       fireEvent.click(actions[1]);
 
       const lastCall = fetch.mock.lastCall;
-      expect(lastCall[0]).toBe('http://localhost:3333/books/1');
+      expect(lastCall[0]).toBe(`${API_URL}/1`);
       expect(lastCall[1].method).toBe('DELETE');
 
       window.fetch.mockResolvedValueOnce({
@@ -114,7 +119,7 @@ describe('RuangPerpus Library App', () => {
       fireEvent.click(actions[0]);
 
       const lastCall = fetch.mock.lastCall;
-      expect(lastCall[0]).toBe('http://localhost:3333/books/1');
+      expect(lastCall[0]).toBe(`${API_URL}/1`);
 
       await waitFor(() => {
         const h2 = windowJSDOM.document.getElementsByTagName('h2')[0];
@@ -142,7 +147,7 @@ describe('RuangPerpus Library App', () => {
       fireEvent.click(actions[0]);
 
       const lastCall = fetch.mock.lastCall;
-      expect(lastCall[0]).toBe('http://localhost:3333/books/1');
+      expect(lastCall[0]).toBe(`${API_URL}/1`);
 
       await waitFor(() => {
         const h2 = windowJSDOM.document.getElementsByTagName('h2')[0];
@@ -180,7 +185,7 @@ describe('RuangPerpus Library App', () => {
       fireEvent.click(buttonSubmit);
 
       const lastCallUpdate = fetch.mock.lastCall;
-      expect(lastCallUpdate[0]).toBe('http://localhost:3333/books/1');
+      expect(lastCallUpdate[0]).toBe(`${API_URL}/1`);
       expect(lastCallUpdate[1].method).toBe('PUT');
 
       const editedBookData = [...dataJSON.books];
@@ -241,7 +246,7 @@ describe('RuangPerpus Library App', () => {
 
       fireEvent.click(buttonSubmit);
 
-      expect(fetch.mock.lastCall[0]).toBe('http://localhost:3333/books');
+      expect(fetch.mock.lastCall[0]).toBe(API_URL);
       expect(fetch.mock.lastCall[1].method).toBe('POST');
 
       window.fetch.mockResolvedValueOnce({

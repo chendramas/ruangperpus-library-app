@@ -4,11 +4,12 @@ function escapeHtml(str) {
   return div.innerHTML;
 }
 
+const API_URL = window.APP_CONFIG?.API_URL || 'http://localhost:3333/books';
+
 let currentPage = 'home';
 let currentBook = null;
 let books = [];
 
-const API_URL = 'http://localhost:3333/books';
 const main = document.querySelector('main');
 
 function showError(message) {
