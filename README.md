@@ -9,16 +9,47 @@ A full-stack **Library Management System** built with vanilla JavaScript, featur
 
 ---
 
+## 📖 Tentang Aplikasi
+
+**RuangPerpus** adalah aplikasi manajemen inventaris buku perpustakaan yang dirancang untuk memudahkan pustakawan atau admin dalam mengelola data koleksi buku. Aplikasi ini menyediakan antarmuka yang bersih dan responsif untuk melakukan operasi CRUD (Create, Read, Update, Delete) pada database buku.
+
+### Use Case
+
+- **Pustakawan/Admin** dapat menambahkan buku baru ke dalam sistem
+- **Pustakawan/Admin** dapat melihat daftar seluruh buku yang tersedia
+- **Pustakawan/Admin** dapat mengedit informasi buku (judul, penulis, tahun terbit, jumlah stok)
+- **Pustakawan/Admin** dapat menghapus buku dari inventaris
+
+### Data yang Dikelola
+
+| Field | Tipe | Deskripsi |
+|-------|------|-----------|
+| `title` | string | Judul buku |
+| `author` | string | Nama penulis |
+| `year` | number | Tahun terbit |
+| `quantity` | number | Jumlah stok yang tersedia |
+
+### Keunggulan
+
+- **Vanilla JavaScript** — Tidak依赖框架, murni ES6+ dengan DOM manipulation
+- **Dark Theme** — Desain modern dengan konsistensi warna dan UX yang baik
+- **XSS Protection** — Semua output di-escape untuk mencegah script injection
+- **Confirmation Dialog** — Konfirmasi sebelum menghapus data
+- **Responsive** — Dapat diakses dari berbagai ukuran layar
+- **Tested** — 6 test case yang covers semua alur CRUD
+
+---
+
 ## ✨ Features
 
 | Feature | Description |
 |---------|-------------|
-| **📖 View Books** | Displays all books in a clean table with title, author, year, and stock |
-| **➕ Add Book** | Form-based input to add new books to the library database |
-| **✏️ Edit Book** | Pre-filled edit form — update any book's details |
-| **🗑️ Delete Book** | One-click removal with confirmation dialog |
-| **⚡ Real-time UI** | All CRUD operations update the table instantly without page refresh |
-| **🧪 Test Coverage** | Jest test suite covering all CRUD flows |
+| **📖 View Books** | Menampilkan daftar buku dalam tabel dengan judul, penulis, tahun, dan stok |
+| **➕ Add Book** | Form input untuk menambahkan buku baru ke database |
+| **✏️ Edit Book** | Form edit dengan data yang sudah terisi — update informasi buku |
+| **🗑️ Delete Book** | Hapus buku dengan konfirmasi dialog |
+| **⚡ Real-time UI** | Semua operasi CRUD update tabel secara instan tanpa refresh halaman |
+| **🧪 Test Coverage** | Jest test suite yang covers semua alur CRUD |
 
 ## 🛠️ Tech Stack
 
